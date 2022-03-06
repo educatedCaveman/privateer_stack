@@ -44,7 +44,7 @@ services:
     volumes:
       # should hardlink the openvpn config and the login config from nfs mount to the config dir via ansible?
       - /docker/docker-compose/privateer/config:/config
-      # - /mnt/mobius/staging/qbittorrent/:/downloads
+      - /mnt/mobius/staging/qbittorrent/:/downloads
     environment:
       - VPN_ENABLED=yes
       # - VPN_USERNAME
@@ -52,7 +52,7 @@ services:
       - LAN_NETWORK=192.168.13.0/24
       # - NAME_SERVERS
       - PUID=1000
-      - PGID=100
+      - PGID=1000
       # - UMASK
       - WEBUI_PORT_ENV=8081
       - INCOMING_PORT_ENV=8999
@@ -73,7 +73,7 @@ services:
     network_mode: "service:transmission-openvpn"
     environment:
         - PUID=1000
-        - PGID=100
+        - PGID=1000
         - TZ=America/New_York
         - AUTO_UPDATE=true #optional
         # - RUN_OPTS=#optional
@@ -89,7 +89,7 @@ services:
     container_name: radarr
     environment:
         - PUID=1000
-        - PGID=100
+        - PGID=1000
         - TZ=America/New_York
         # - UMASK_SET=022 #optional
     ports:
@@ -105,7 +105,7 @@ services:
     container_name: sonarr
     environment:
         - PUID=1000
-        - PGID=100
+        - PGID=1000
         - TZ=America/New_York
         # - UMASK_SET=022 #optional
     ports:
@@ -121,13 +121,27 @@ services:
     container_name: lidarr
     environment:
         - PUID=1000
-        - PGID=100
+        - PGID=1000
         - TZ=America/New_York
         # - UMASK_SET=022 #optional
     ports:
       - 8686:8686
     volumes:
-        # TODO: get config
         - /docker/docker-compose/privateer/lidarr:/config
         - /mnt/mobius/Music/library:/media
+    restart: unless-stopped
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - /docker/docker-compose/privateer/bazarr:/config
+      - /mnt/mobius/Video/Movies:/movies
+      - /mnt/mobius/Video/TV-shows:/tv
+    ports:
+      - 6767:6767
     restart: unless-stopped
