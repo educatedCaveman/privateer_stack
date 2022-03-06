@@ -66,104 +66,106 @@ services:
       - 8999:8999/udp
     restart: unless-stopped
     privileged: true
-    networks:
-      - high_seas
+    # networks:
+    #   - high_seas
+    cap_add:
+      - NET_ADMIN
 
 
 
 
 
-  # https://docs.linuxserver.io/images/docker-jackett
-  jackett:
-    image: linuxserver/jackett
-    # container_name: jackett
-    # network_mode: "service:qbittorrentvpn"
-    environment:
-        - PUID=1000
-        - PGID=1000
-        - TZ=America/New_York
-        - AUTO_UPDATE=true #optional
-        # - RUN_OPTS=#optional
-    ports:
-      - 9117:9117
-    volumes:
-        - /docker/docker-compose/privateer/jackett:/config
-    restart: unless-stopped
-    networks:
-      - high_seas
+  # # https://docs.linuxserver.io/images/docker-jackett
+  # jackett:
+  #   image: linuxserver/jackett
+  #   # container_name: jackett
+  #   # network_mode: "service:qbittorrentvpn"
+  #   environment:
+  #       - PUID=1000
+  #       - PGID=1000
+  #       - TZ=America/New_York
+  #       - AUTO_UPDATE=true #optional
+  #       # - RUN_OPTS=#optional
+  #   ports:
+  #     - 9117:9117
+  #   volumes:
+  #       - /docker/docker-compose/privateer/jackett:/config
+  #   restart: unless-stopped
+  #   networks:
+  #     - high_seas
 
-  # https://docs.linuxserver.io/images/docker-radarr
-  radarr:
-    image: linuxserver/radarr
-    # network_mode: "service:qbittorrentvpn"
-    # container_name: radarr
-    environment:
-        - PUID=1000
-        - PGID=1000
-        - TZ=America/New_York
-        # - UMASK_SET=022 #optional
-    ports:
-      - 7878:7878
-    volumes:
-        - /docker/docker-compose/privateer/radarr:/config
-        - /mnt/mobius/Video/Movies:/media
-    restart: unless-stopped
-    networks:
-      - high_seas
+  # # https://docs.linuxserver.io/images/docker-radarr
+  # radarr:
+  #   image: linuxserver/radarr
+  #   # network_mode: "service:qbittorrentvpn"
+  #   # container_name: radarr
+  #   environment:
+  #       - PUID=1000
+  #       - PGID=1000
+  #       - TZ=America/New_York
+  #       # - UMASK_SET=022 #optional
+  #   ports:
+  #     - 7878:7878
+  #   volumes:
+  #       - /docker/docker-compose/privateer/radarr:/config
+  #       - /mnt/mobius/Video/Movies:/media
+  #   restart: unless-stopped
+  #   networks:
+  #     - high_seas
  
-  # https://docs.linuxserver.io/images/docker-sonarr
-  sonarr:
-    image: linuxserver/sonarr
-    # network_mode: "service:qbittorrentvpn"
-    # container_name: sonarr
-    environment:
-        - PUID=1000
-        - PGID=1000
-        - TZ=America/New_York
-        # - UMASK_SET=022 #optional
-    ports:
-      - 8989:8989
-    volumes:
-        - /docker/docker-compose/privateer/sonarr:/config
-        - /mnt/mobius/Video/TV-shows:/media
-    restart: unless-stopped
-    networks:
-      - high_seas
+  # # https://docs.linuxserver.io/images/docker-sonarr
+  # sonarr:
+  #   image: linuxserver/sonarr
+  #   # network_mode: "service:qbittorrentvpn"
+  #   # container_name: sonarr
+  #   environment:
+  #       - PUID=1000
+  #       - PGID=1000
+  #       - TZ=America/New_York
+  #       # - UMASK_SET=022 #optional
+  #   ports:
+  #     - 8989:8989
+  #   volumes:
+  #       - /docker/docker-compose/privateer/sonarr:/config
+  #       - /mnt/mobius/Video/TV-shows:/media
+  #   restart: unless-stopped
+  #   networks:
+  #     - high_seas
  
-  # https://docs.linuxserver.io/images/docker-lidarr#linuxserver-lidarr
-  lidarr:
-    image: linuxserver/lidarr
-    # network_mode: "service:qbittorrentvpn"
-    # container_name: lidarr
-    environment:
-        - PUID=1000
-        - PGID=1000
-        - TZ=America/New_York
-        # - UMASK_SET=022 #optional
-    ports:
-      - 8686:8686
-    volumes:
-        - /docker/docker-compose/privateer/lidarr:/config
-        - /mnt/mobius/Music/library:/media
-    restart: unless-stopped
-    networks:
-      - high_seas
+  # # https://docs.linuxserver.io/images/docker-lidarr#linuxserver-lidarr
+  # lidarr:
+  #   image: linuxserver/lidarr
+  #   # network_mode: "service:qbittorrentvpn"
+  #   # container_name: lidarr
+  #   environment:
+  #       - PUID=1000
+  #       - PGID=1000
+  #       - TZ=America/New_York
+  #       # - UMASK_SET=022 #optional
+  #   ports:
+  #     - 8686:8686
+  #   volumes:
+  #       - /docker/docker-compose/privateer/lidarr:/config
+  #       - /mnt/mobius/Music/library:/media
+  #   restart: unless-stopped
+  #   networks:
+  #     - high_seas
 
-  # https://docs.linuxserver.io/images/docker-bazarr
-  bazarr:
-    image: lscr.io/linuxserver/bazarr
-    # network_mode: "service:qbittorrentvpn"
-    # container_name: bazarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/New_York
-    volumes:
-      - /docker/docker-compose/privateer/bazarr:/config
-      - /mnt/mobius/Video/Movies:/movies
-      - /mnt/mobius/Video/TV-shows:/tv
-    ports:
-      - 6767:6767
-    restart: unless-stopped
-    networks:
-      - high_seas
+  # # https://docs.linuxserver.io/images/docker-bazarr
+  # bazarr:
+  #   image: lscr.io/linuxserver/bazarr
+  #   # network_mode: "service:qbittorrentvpn"
+  #   # container_name: bazarr
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=America/New_York
+  #   volumes:
+  #     - /docker/docker-compose/privateer/bazarr:/config
+  #     - /mnt/mobius/Video/Movies:/movies
+  #     - /mnt/mobius/Video/TV-shows:/tv
+  #   ports:
+  #     - 6767:6767
+  #   restart: unless-stopped
+  #   networks:
+  #     - high_seas
