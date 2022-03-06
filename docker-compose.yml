@@ -60,7 +60,8 @@ services:
       - 8081:8080
       - 8999:8999
       - 8999:8999/udp
-    restart: unless stopped
+    restart: unless-stopped
+    privileged: true
 
 
 
@@ -69,7 +70,7 @@ services:
   # https://docs.linuxserver.io/images/docker-jackett
   jackett:
     image: linuxserver/jackett
-    container_name: jackett
+    # container_name: jackett
     network_mode: "service:qbittorrentvpn"
     environment:
         - PUID=1000
@@ -87,7 +88,7 @@ services:
   radarr:
     image: linuxserver/radarr
     network_mode: "service:qbittorrentvpn"
-    container_name: radarr
+    # container_name: radarr
     environment:
         - PUID=1000
         - PGID=1000
@@ -104,7 +105,7 @@ services:
   sonarr:
     image: linuxserver/sonarr
     network_mode: "service:qbittorrentvpn"
-    container_name: sonarr
+    # container_name: sonarr
     environment:
         - PUID=1000
         - PGID=1000
@@ -121,7 +122,7 @@ services:
   lidarr:
     image: linuxserver/lidarr
     network_mode: "service:qbittorrentvpn"
-    container_name: lidarr
+    # container_name: lidarr
     environment:
         - PUID=1000
         - PGID=1000
@@ -138,7 +139,7 @@ services:
   bazarr:
     image: lscr.io/linuxserver/bazarr
     network_mode: "service:qbittorrentvpn"
-    container_name: bazarr
+    # container_name: bazarr
     environment:
       - PUID=1000
       - PGID=1000
