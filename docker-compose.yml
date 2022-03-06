@@ -66,7 +66,7 @@ services:
 
 
 
- 
+  # https://docs.linuxserver.io/images/docker-jackett
   jackett:
     image: linuxserver/jackett
     container_name: jackett
@@ -82,7 +82,8 @@ services:
     volumes:
         - /docker/docker-compose/privateer/jackett:/config
     restart: unless-stopped
- 
+
+  # https://docs.linuxserver.io/images/docker-radarr
   radarr:
     image: linuxserver/radarr
     network_mode: "service:transmission-openvpn"
@@ -99,6 +100,7 @@ services:
         - /mnt/mobius/Video/Movies:/media
     restart: unless-stopped
  
+  # https://docs.linuxserver.io/images/docker-sonarr
   sonarr:
     image: linuxserver/sonarr
     network_mode: "service:transmission-openvpn"
@@ -115,6 +117,7 @@ services:
         - /mnt/mobius/Video/TV-shows:/media
     restart: unless-stopped
  
+  # https://docs.linuxserver.io/images/docker-lidarr#linuxserver-lidarr
   lidarr:
     image: linuxserver/lidarr
     network_mode: "service:transmission-openvpn"
@@ -131,6 +134,7 @@ services:
         - /mnt/mobius/Music/library:/media
     restart: unless-stopped
 
+  # https://docs.linuxserver.io/images/docker-bazarr
   bazarr:
     image: lscr.io/linuxserver/bazarr
     container_name: bazarr
