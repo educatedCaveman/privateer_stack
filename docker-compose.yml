@@ -1,4 +1,8 @@
 version: '3'
+
+networks:
+  high_seas:
+
 services:
   # transmission-openvpn:
   #   volumes:
@@ -62,6 +66,8 @@ services:
       - 8999:8999/udp
     restart: unless-stopped
     privileged: true
+    networks:
+      - high_seas
 
 
 
@@ -71,7 +77,7 @@ services:
   jackett:
     image: linuxserver/jackett
     # container_name: jackett
-    network_mode: "service:qbittorrentvpn"
+    # network_mode: "service:qbittorrentvpn"
     environment:
         - PUID=1000
         - PGID=1000
@@ -83,11 +89,13 @@ services:
     volumes:
         - /docker/docker-compose/privateer/jackett:/config
     restart: unless-stopped
+    networks:
+      - high_seas
 
   # https://docs.linuxserver.io/images/docker-radarr
   radarr:
     image: linuxserver/radarr
-    network_mode: "service:qbittorrentvpn"
+    # network_mode: "service:qbittorrentvpn"
     # container_name: radarr
     environment:
         - PUID=1000
@@ -100,11 +108,13 @@ services:
         - /docker/docker-compose/privateer/radarr:/config
         - /mnt/mobius/Video/Movies:/media
     restart: unless-stopped
+    networks:
+      - high_seas
  
   # https://docs.linuxserver.io/images/docker-sonarr
   sonarr:
     image: linuxserver/sonarr
-    network_mode: "service:qbittorrentvpn"
+    # network_mode: "service:qbittorrentvpn"
     # container_name: sonarr
     environment:
         - PUID=1000
@@ -117,11 +127,13 @@ services:
         - /docker/docker-compose/privateer/sonarr:/config
         - /mnt/mobius/Video/TV-shows:/media
     restart: unless-stopped
+    networks:
+      - high_seas
  
   # https://docs.linuxserver.io/images/docker-lidarr#linuxserver-lidarr
   lidarr:
     image: linuxserver/lidarr
-    network_mode: "service:qbittorrentvpn"
+    # network_mode: "service:qbittorrentvpn"
     # container_name: lidarr
     environment:
         - PUID=1000
@@ -134,11 +146,13 @@ services:
         - /docker/docker-compose/privateer/lidarr:/config
         - /mnt/mobius/Music/library:/media
     restart: unless-stopped
+    networks:
+      - high_seas
 
   # https://docs.linuxserver.io/images/docker-bazarr
   bazarr:
     image: lscr.io/linuxserver/bazarr
-    network_mode: "service:qbittorrentvpn"
+    # network_mode: "service:qbittorrentvpn"
     # container_name: bazarr
     environment:
       - PUID=1000
@@ -151,3 +165,5 @@ services:
     ports:
       - 6767:6767
     restart: unless-stopped
+    networks:
+      - high_seas
